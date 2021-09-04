@@ -198,10 +198,12 @@ public class TestEventHandler {
     assertTrue(!eventHandlerThread.isAlive());
     assertTrue(!emitterThread.isAlive());
     verify(writer).close();
+
+    Utils.cleanupHDFSPath(fs.getConf(), jobDir);
   }
 
   @AfterClass
   public void cleanUp() throws IOException {
-    fs.delete(jobDir, true);
+    Utils.cleanupHDFSPath(fs.getConf(), jobDir);
   }
 }
